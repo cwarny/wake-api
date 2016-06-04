@@ -5,7 +5,7 @@ var config = {
 	test: 'testing',
 	prod: 'production',
 	port: {
-		http: process.env.HTTP_PORT || 8888
+		http: process.env.PORT || 8888
 	},
 	expireTime: 10 * 24 * 60 * 60, // 10 days in seconds
 	secrets: { 

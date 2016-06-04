@@ -118,7 +118,7 @@ exports.get = (req, res, next) => {
 							type: 'violations', 
 							id: viol.code,
 							links: {
-								self: `http://${req.hostname}:${config.port.http}/api/violations/${viol.code}`
+								self: `https://${req.hostname}/api/violations/${viol.code}`
 							}
 						};
 

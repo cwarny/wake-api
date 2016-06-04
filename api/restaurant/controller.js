@@ -92,7 +92,7 @@ exports.get = (req, res, next) => {
 							type: 'inspections', 
 							id: insp.inspection_id,
 							links: {
-								self: `http://${req.hostname}:${config.port.http}/api/inspections/${insp.inspection_id}`
+								self: `https://${req.hostname}/api/inspections/${insp.inspection_id}`
 							}
 						};
 
@@ -106,8 +106,8 @@ exports.get = (req, res, next) => {
 							i.relationships = {
 								violations: {
 									links: {
-										self: `http://${req.hostname}:${config.port.http}/api/inspections/${insp.inspection_id}/relationships/violations`,
-										related: `http://${req.hostname}:${config.port.http}/api/inspections/${insp.inspection_id}/violations`
+										self: `https://${req.hostname}/api/inspections/${insp.inspection_id}/relationships/violations`,
+										related: `https://${req.hostname}/api/inspections/${insp.inspection_id}/violations`
 									},
 									data: insp.violations.map(viol => ({ type: 'violations', id: viol.code }))
 								}
@@ -118,7 +118,7 @@ exports.get = (req, res, next) => {
 							if ('relationships' in i) {
 								i.relationships.restaurant = {
 									links: {
-										self: `http://${req.hostname}:${config.port.http}/api/restaurants/${d._id}`
+										self: `https://${req.hostname}/api/restaurants/${d._id}`
 									},
 									data: {
 										id: d._id,
@@ -129,7 +129,7 @@ exports.get = (req, res, next) => {
 								i.relationships = {
 									restaurant: {
 										links: {
-											self: `http://${req.hostname}:${config.port.http}/api/restaurants/${d._id}`
+											self: `https://${req.hostname}/api/restaurants/${d._id}`
 										},
 										data: {
 											id: d._id,
@@ -198,7 +198,7 @@ exports.getOne = (req, res, next) => {
 						type: 'inspections', 
 						id: insp.inspection_id,
 						links: {
-							self: `http://${req.hostname}:${config.port.http}/api/inspections/${insp.inspection_id}`
+							self: `https://${req.hostname}/api/inspections/${insp.inspection_id}`
 						}
 					};
 
@@ -212,8 +212,8 @@ exports.getOne = (req, res, next) => {
 						i.relationships = {
 							violations: {
 								links: {
-									self: `http://${req.hostname}:${config.port.http}/api/inspections/${insp.inspection_id}/relationships/violations`,
-									related: `http://${req.hostname}:${config.port.http}/api/inspections/${insp.inspection_id}/violations`
+									self: `https://${req.hostname}/api/inspections/${insp.inspection_id}/relationships/violations`,
+									related: `https://${req.hostname}/api/inspections/${insp.inspection_id}/violations`
 								},
 								data: insp.violations.map(viol => ({ type: 'violations', id: viol.code }))
 							}
@@ -224,7 +224,7 @@ exports.getOne = (req, res, next) => {
 						if ('relationships' in i) {
 							i.relationships.restaurant = {
 								links: {
-									self: `http://${req.hostname}:${config.port.http}/api/restaurants/${resp._id}`
+									self: `https://${req.hostname}/api/restaurants/${resp._id}`
 								},
 								data: {
 									id: resp._id,
@@ -235,7 +235,7 @@ exports.getOne = (req, res, next) => {
 							i.relationships = {
 								restaurant: {
 									links: {
-										self: `http://${req.hostname}:${config.port.http}/api/restaurants/${resp._id}`
+										self: `https://${req.hostname}/api/restaurants/${resp._id}`
 									},
 									data: {
 										id: resp._id,
