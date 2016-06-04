@@ -5,7 +5,7 @@ const es = require('../../es'),
 
 exports.get = (req, res, next) => {
 	var /*username = req.auth.username,*/
-		include = req.query.include,
+		include = req.include,
 		filter = req.query.filter || {},
 		pageLimit = req.pageLimit,
 		pageOffset = req.pageOffset,
