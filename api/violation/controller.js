@@ -14,7 +14,7 @@ exports.getOne = (req, res, next) => {
 			next(err);
 		} else {
 			res.send({ 
-				data: utils.normalizeViolation(resp._id, null, resp._source) 
+				data: utils.normalizeViolation(resp._id, null, resp._source, req.hostname) 
 			});
 		}
 	});

@@ -3,12 +3,12 @@ const _ = require('lodash'),
 	qs = require('qs');
 
 module.exports = {
-	normalizeRestaurant: (id, score, record) => {
+	normalizeRestaurant: (id, score, record, hostname) => {
 		var normalizedRecord = {
 			type: 'restaurants',
 			id: id,
 			links: {
-				self: `http://localhost:${config.port.http}/api/restaurants/${id}`
+				self: `https://${hostname}/api/restaurants/${id}`
 			},
 			attributes: _.omit(record, ['inspections', 'restaurant_id'])
 		};
@@ -19,8 +19,8 @@ module.exports = {
 			normalizedRecord.relationships = {
 				inspections: {
 					links: {
-						self: `http://localhost:${config.port.http}/api/restaurants/${id}/relationships/inspections`,
-						related: `http://localhost:${config.port.http}/api/restaurants/${id}/inspections`
+						self: `https://${hostname}/api/restaurants/${id}/relationships/inspections`,
+						related: `https://${hostname}/api/restaurants/${id}/inspections`
 					},
 					data: record.inspections.map(insp => ({ type: 'inspections', id: insp.inspection_id }))
 				}
@@ -30,12 +30,12 @@ module.exports = {
 		return normalizedRecord;
 	},
 
-	normalizeInspection: (id, score, record) => {
+	normalizeInspection: (id, score, record, hostname) => {
 		var normalizedRecord = {
 			type: 'inspections',
 			id: id,
 			links: {
-				self: `http://localhost:${config.port.http}/api/inspections/${id}`
+				self: `https://${hostname}/api/inspections/${id}`
 			},
 			attributes: _.omit(record, ['violations', 'inspection_id', 'restaurant_id'])
 		};
@@ -46,14 +46,14 @@ module.exports = {
 			normalizedRecord.relationships = {
 				violations: {
 					links: {
-						self: `http://localhost:${config.port.http}/api/inspections/${id}/relationships/violations`,
-						related: `http://localhost:${config.port.http}/api/inspections/${id}/violations`
+						self: `https://${hostname}/api/inspections/${id}/relationships/violations`,
+						related: `https://${hostname}/api/inspections/${id}/violations`
 					},
 					data: record.violations.map(viol => ({ type: 'violations', id: viol.code }))
 				},
 				restaurant: {
 					links: {
-						self: `http://localhost:${config.port.http}/api/restaurants/${id}`
+						self: `https://${hostname}/api/restaurants/${id}`
 					},
 					data: {
 						id: id,
@@ -67,7 +67,7 @@ module.exports = {
 				id: viol.code,
 				attributes: _.omit(viol, 'code'),
 				links: {
-					self: `http://localhost:${config.port.http}/api/violations/${viol.code}`
+					self: `https://${hostname}/api/violations/${viol.code}`
 				}
 			}));
 		}
@@ -75,12 +75,12 @@ module.exports = {
 		return normalizedRecord;
 	},
 
-	normalizeViolation: (id, score, record) => {
+	normalizeViolation: (id, score, record, hostname) => {
 		var normalizedRecord = {
 			type: 'violations',
 			id: id,
 			links: {
-				self: `http://localhost:${config.port.http}/api/violations/${id}`
+				self: `https://${hostname}/api/violations/${id}`
 			},
 			attributes: record
 		};
@@ -142,7 +142,7 @@ module.exports = {
 				fullPath = fullPath.slice(0,fullPath.length-1);
 			}
 			
-			next = `http://${hostname}:${port}${fullPath}?${queryString}`;
+			next = `https://${hostname}${fullPath}?${queryString}`;
 		}
 
 		if (pageOffset > 0) {
@@ -155,7 +155,7 @@ module.exports = {
 				fullPath = fullPath.slice(0,fullPath.length-1);
 			}
 
-			prev = `http://${hostname}:${port}${fullPath}?${queryString}`;
+			prev = `https://${hostname}${fullPath}?${queryString}`;
 		}
 
 		return { prev: prev, next: next };

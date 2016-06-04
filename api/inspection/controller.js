@@ -106,7 +106,7 @@ exports.get = (req, res, next) => {
 					if ('highlight' in d) {
 						d._source.highlight = d.highlight;
 					}
-					return utils.normalizeInspection(d._id, d._score, d._source);
+					return utils.normalizeInspection(d._id, d._score, d._source, req.hostname);
 				})
 			};
 

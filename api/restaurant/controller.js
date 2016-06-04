@@ -79,7 +79,7 @@ exports.get = (req, res, next) => {
 					if ('highlight' in d) {
 						d._source.highlight = d.highlight;
 					}
-					return utils.normalizeRestaurant(d._id, d._score, d._source);
+					return utils.normalizeRestaurant(d._id, d._score, d._source, req.hostname);
 				})
 			};
 
@@ -188,7 +188,7 @@ exports.getOne = (req, res, next) => {
 			next(err);
 		} else {
 			var response = { 
-				data: utils.normalizeRestaurant(resp._id, null, resp._source) 
+				data: utils.normalizeRestaurant(resp._id, null, resp._source, req.hostname) 
 			};
 
 			if ('inspections' in resp._source && ('inspections' in include || !include.length)) {
