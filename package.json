@@ -4,7 +4,7 @@
   "description": "REST API for the Wake restaurant inspections data",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node ./index.js"
   },
   "author": "Cedric Warny",
   "license": "MIT",
